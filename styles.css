@@ -1,0 +1,69 @@
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6{
+    margin: 0;
+    padding: 0;
+}
+
+h4{
+    margin-top: 1rem;
+}
+
+body{
+    max-width: 1100px;
+    margin-inline: auto;
+    border: 1px solid #555;
+}
+
+.header {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #20576E;
+    color: aliceblue;
+    text-align: center;
+    padding-block: 2rem;
+}
+
+.container{
+    display: flex;
+    align-items: flex-start;
+    padding-block: 0.2rem;
+    border-top: 1px solid #555;
+}
+
+.section{
+    flex: 1; 
+    padding: 20px;
+}
+
+.experience{
+    border-left: 1px solid black;
+}
+
+.header .name{
+padding-top: 20px;
+}
+.personal-info{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20px;
+        margin-right: 20px;
+    /* gap: 
+400px; */
+}
+
+.phone{
+    color: #20576E}
+
+.list1{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+}
+
+.hskills{
+    padding-bottom: 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
