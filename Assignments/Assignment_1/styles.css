@@ -37,6 +37,10 @@ body{
     padding: 20px;
 }
 
+.section:nth-child(2){
+    flex: 2;
+}
+
 .experience{
     border-left: 1px solid black;
 }

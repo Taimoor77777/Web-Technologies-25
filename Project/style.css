@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html body{
+    width: 100%;
+    overflow-x: hidden;
+    /* box-sizing: border-box; */
+
+}
+.banner{
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-size: 13px;
+    text-decoration: underline;
+    padding: 2px 0px;
+    
+    width: 100%;
+
+}
+
+
+.bg-img {
+    
+    height: 100vh;
+    width: 100%;
+    background-image: url('Homepage-SS25-Campaign-15.jpg');
+    position: relative;
+    background-size: cover;
+    
+}
+
+.navbar{
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 20px;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* top: 10px; */
+
+} 
+
+.navbar a{
+    color: white;
+    text-decoration: none;
+    /* display: inline-block; */
+    margin: 0px 15px;
+}
+
+
+

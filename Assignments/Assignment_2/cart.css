@@ -1,0 +1,42 @@
+/* *, *::before, *::after{
+
+} */
+
+html body{
+    background-color: rgb(80, 98, 98);
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.navbar{
+    background-color: rgb(24, 78, 60);
+    width: 100%;
+    overflow: hidden;
+    padding: 10px 20px;
+    /* position: fixed; */
+    /* top: 10px; */
+
+}   
+
+.navbar a{
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 20px;
+}
+
+.navbar a:hover{
+    background-color: aquamarine;
+    border-radius: 5px;
+}
+
+.form-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    width: 300px;
+    border-radius: 5px;
+    /* display: flex; */
+}
