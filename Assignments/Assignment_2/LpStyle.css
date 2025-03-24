@@ -68,6 +68,7 @@ html body{
 .outer-container{
     /* background-color: black; */
     height: 100vh;
+
     /* display: flex; */
 }
 
@@ -191,6 +192,38 @@ span{
     left: 80%;
     width: 120px;
     text-decoration: none;
+}
+
+.inner-container-img{
+    height: 100vh;
+    /* background-color: brown; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin: 0px 30px;
+}
+
+.img-container{
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* height: auto; */
+    /* align-items: center; */
+}
+
+.img-container img{
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+
+}
+
+.img-container p{
+    font-family: "Bembo", Georgia, serif;
+    margin-top: 20px; 
+    font-size: 17px;
 }
 
 
