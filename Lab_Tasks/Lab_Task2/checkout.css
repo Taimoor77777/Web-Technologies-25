@@ -1,4 +1,3 @@
-/* Global styles */
 body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color: #f9f9f9;
@@ -25,7 +24,6 @@ body {
     color: #111;
 }
 
-/* Form elements */
 .form-group {
     margin-bottom: 20px;
 }
@@ -58,7 +56,6 @@ textarea {
     min-height: 80px;
 }
 
-/* Error handling */
 .invalid {
     border-color: #d9534f !important;
 }
@@ -70,7 +67,6 @@ textarea {
     display: block;
 }
 
-/* Submit button */
 .submit-btn {
     background-color: #000;
     color: #fff;
