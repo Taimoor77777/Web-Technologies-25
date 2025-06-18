@@ -1,0 +1,91 @@
+<div class="bg-img2">
+
+        <div class="line">
+            T-BAR SLING BAG
+            <div class="btn-container">
+                <div class="btnw">Shop Women</div>
+                <div class="btn">Shop Men</div>
+            </div>
+            
+        </div>
+
+    </div>
+
+    <div class="bg-img3">
+
+        <div class="line">
+            COATS AND OUTERWEAR
+           
+            <div class="btn-container">
+                <div class="btnw">Shop Women</div>
+                <div class="btn">Shop Men</div>
+            </div>
+        </div>
+    </div>
+
+            <!-- <div class="btn-container">
+                <div class="btnw">Shop Women</div>
+                <div class="btn">Shop Men</div>
+            </div> -->
+            
+        </div>
+
+    </div>
+
+    <div class="outer-container">
+        <div class="inner-container">
+            <div class="bg-img4"></div>
+            <div class="outer-paragraph">
+                <div class="paragraph">
+                    <h1>Autumn Winter 2025</h1>
+                    <p></p>
+                    ​Galerie de Géologie et de Minéralogie, Jardin des Plantes, Paris
+                    <p></p>
+                    <span>Discover More</span>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    
+
+    <div class="outer-container-img">
+        <div class="heading">Exclusive Services</div>
+        <div class="inner-container-img">
+            <div class="img-container">
+                <img src="Online-Assistance.jpg" alt="no image found">
+                <p>Online Assistance -></p>
+            </div>
+
+            <div class="img-container">
+                <img src="3000x2404.jpg" alt="no image found">
+                <p>Store Services -></p>
+            </div>
+
+            <div class="img-container">
+                <img src="AM870_SS25_1x1_NOLOGO_7.jpg" alt="no image found">
+                <p>Complimentary Express Shipping and Returns -></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-section">
+    <h2 class="heading">Featured Products</h2>
+    <div class="product-grid">
+        <% products.forEach(product => { %>
+            <div class="product-card">
+                <img src="<%= product.image %>" alt="<%= product.name %>" class="product-image">
+                <h3 class="product-name"><%= product.name %></h3>
+                <p class="product-price">Price: $<%= product.price %></p>
+                <div class="btn-container">
+                    <div class="btnw">Shop Women</div>
+                    <div class="btn">Shop Men</div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+      

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV</title>
+    <link rel="stylesheet" href="LpStyle.css">
+</head>
+<body>
+
+    <div class="banner">
+        Spring Summer 2025
+    </div> 
+
+   
+
+    
+    <div class="bg-img">
+        <!-- <div class="container"> -->
+            <div class="navbar">
+                <div class="logo" style="color: white; font-size: 22px; font-family: Georgia, 'Times New Roman', Times, serif;">McQueen</div>
+                <% if (userEmail) { %>
+                    <p>Welcome, <%= userEmail %></p>
+                <% } %>
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="/contact-us">Contact</a>
+                     <% if (typeof userEmail !== 'undefined') { %>
+                        <!-- <a href="/">Home</a> -->
+                        <a href="/logout">Logout</a>
+                    <% } else { %>
+                        <a href="/login">Login</a>
+                        <a href="/register">Register</a>
+                    <% } %>
+                </div>
+
+               
+                
+            </div>
+            <div class="line">
+                WOMEN'S TAILORING
+                <div class="btn-container">
+                    <div class="btn">Shop Now</div>
+                </div>
+                
+            </div>
+        
+    </div>
+
+    <%- body %>
+
+    <div>
+        <footer class="site-footer">
+            <div class="footer-content1">
+                <div class="f-container">
+                    <h4>Customer Services</h4>
+                <ul>
+                    <li>FAQs</li>
+                    <li>Track my Order</li>
+                    <li>Register Return</li>
+                    <li>Store Locater</li>
+                    <li>Request an Appointment</li>
+                </ul>
+                </div>
+
+                <div class="f-container">
+                    <h4>The company</h4>
+                <ul>
+                    <li>Legal Area</li>
+                    <li>Privacy Policy & Cookies</li>
+                    <li>Cookie Settings</li>
+                    <li>Careers</li>
+                    <li>Alexander McQueen
+                    </li>
+                </ul>
+                </div>
+
+                <div class="f-container">
+                    <h4>Follow</h4>
+                <ul>
+                    <li>Facebook</li>
+                    <li>Instagram</li>
+                    <li>X</li>
+                    <li>Youtube</li>
+                    <li>Tiktok</li>
+                </ul>
+                </div>
+
+                <div class="f-container">
+                    <h4>Subscribe to the Newsletter  -></h4>
+                <ul>
+                    <li>Shipping to:</li>
+                    <li>United Kingdom -> EN</li>
+                </ul>
+                </div>
+
+                
+            </div>
+            <div class="footer-content2">
+              <p>&copy; 2025 McQueen. All rights reserved.</p>
+            </div>
+          </footer>
+    </div>
+</body>
+</html>

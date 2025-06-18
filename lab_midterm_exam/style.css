@@ -1,0 +1,361 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html body{
+    width: 100%;
+    overflow-x: hidden;
+    
+
+}
+
+@font-face {
+    font-family: "Bembo";  
+    src: url("2943368c32b04a3b-s.p.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Helvetica";  
+    src: url("7f2f2c98ecaceb4d-s.p.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.banner{
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-size: 13px;
+    text-decoration: underline;
+    padding: 2px 0px;
+    
+    width: 100%;
+
+}
+
+.bg-img {
+    
+    height: 100vh;
+    width: 100%;
+    background-image: url('Homepage-SS25-Campaign-15.jpg');
+    position: relative;
+    background-size: cover;
+    /* background-size: contain; */
+    background-repeat: no-repeat;
+    
+}
+
+.bg-img2{
+    background-image: url('3000x1688-1.jpg');
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.bg-img3{
+    background-image: url('Homepage-SS25-Campaign-13.jpg');
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    position: relative;
+}
+
+.outer-container{
+    /* background-color: black; */
+    height: auto;
+
+    /* display: flex; */
+}
+
+.inner-container{
+    /* background-color: aqua; */
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    display: flex;
+    align-items: stretch;
+}
+
+.bg-img4{
+    /* background-color: blue; */
+    background-image: url('McQueen_AW25_Hero_Finale-02.jpg');
+    height: 650px;
+    background-size: cover;
+    /* width: 1000px; */
+    flex: 55%;
+    background-position: center top;
+}
+
+.outer-paragraph{
+    /* background-color: brown; */
+    flex: 45%;
+    /* align-items: center; */
+    /* margin-top: 30px; */
+    display: flex;
+    justify-content: center;
+    /* position: relative;
+    padding-left: 50px; */
+}
+
+.paragraph{
+    /* background-color: blueviolet; */
+    text-align: center;
+    margin: 100px 190px;
+    
+    /* position: absolute; */
+    /* top: 50%;
+    left: 50%; */
+}
+
+.paragraph h1{
+    /* overflow-wrap: break-word; */
+    font-size: 45px;
+}
+
+span{
+    text-decoration: underline;
+}
+
+.paragraph p{
+    /* background-color: beige; */
+    padding-top: 70px;
+}
+
+
+.line{
+    /* background-color: red; */
+    position: absolute;
+    bottom: 5%;
+    left: 38%;
+    text-align: center;
+    /* transform: translateX(25%); */
+    color: white;
+    font-size: 40px;
+    font-family: "Bembo", Georgia, serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.line .btn{
+    background-color: black;
+    padding: 12px 3px;
+    text-align: center;
+    /* border-radius: 8px; */
+    font-size: 13px;
+    /* font-weight: lighter; */
+    font-family: "Helvetica", Georgia, serif;
+    left: 80%;
+    width: 100px;
+    text-decoration: none;
+}
+
+.line .btn-container{
+    display: flex;
+    gap: 20px;
+    margin-top: 12px;
+}
+
+.line .btn-container .btnw{
+    background-color: black;
+    padding: 12px 3px;
+    text-align: center;
+    /* border-radius: 8px; */
+    font-size: 13px;
+    /* font-weight: lighter; */
+    font-family: "Helvetica", Georgia, serif;
+    left: 80%;
+    width: 120px;
+    text-decoration: none;
+}
+
+.outer-container-img{
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.heading{
+    font-size: 24px;
+    font-family: "Bembo", Georgia, serif;
+    margin: 0px 30px;
+    padding-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.inner-container-img{
+    /* height: 100vh; */
+    /* background-color: brown; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin: 0px 30px;
+}
+
+.img-container{
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* height: auto; */
+    /* align-items: center; */
+}
+
+.img-container img{
+    width: 100%;
+    height: 400px;
+    /* aspect-ratio: 1/1; */
+    object-fit: cover;
+
+}
+
+.img-container p{
+    font-family: "Bembo", Georgia, serif;
+    margin-top: 20px; 
+    font-size: 17px;
+}
+
+
+/* .bg-img {
+    
+    height: 100vh;
+    width: 100%;
+    background-image: url('Homepage-SS25-Campaign-15.jpg');
+    position: relative;
+    background-size: cover; */
+    /* background-size: contain; */
+    /* background-repeat: no-repeat;
+    
+} */
+
+
+
+.navbar{
+    background-color: rgb(64, 64, 64);
+    top: 0;
+    left: 0;
+    width: 100%;    
+    padding: 15px 20px;
+    /* position: absolute; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* top: 10px; */
+
+} 
+
+.navbar a{
+    color: white;
+    text-decoration: none;
+    /* display: inline-block; */
+    margin: 0px 15px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #222;
+  }
+  
+  .card-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .card {
+    background-color: #fff;
+    flex: 1;
+    min-width: 220px;
+    max-width: 260px;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s;
+    text-align: center;
+  }
+  
+  .card:hover {
+    transform: scale(1.02);
+  }
+  
+  .card h2 {
+    font-size: 1.2rem;
+    color: #111;
+    margin-bottom: 5px;
+  }
+  
+  .card p {
+    color: #666;
+    margin-bottom: 15px;
+  }
+  
+  button {
+    background-color: #222;
+    color: #fff;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #444;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  
+  iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+
+
+.site-footer {
+    background-color: #000;        
+    color: #fff;                   
+    padding: 20px 40px;
+    /* text-align: center; */
+  }
+  
+  .footer-content1 {
+    /* max-width: 1200px; */
+    /* margin: 0 auto; */
+    display: flex;
+    /* justify-content: space-between; */
+    padding-top: 15px;
+    padding-bottom: 30px;
+    gap: 190px;
+  }
+
+  ul{
+    list-style: none;
+    padding: 0;
+    margin: 0   ;
+  }
+
+  li {
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 12px;
+    margin-top: 20px;
+  }
+  
+
