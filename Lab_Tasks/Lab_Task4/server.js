@@ -5,12 +5,14 @@ let session = require('express-session');
 let bcrypt = require('bcryptjs');
 let User = require('./models/User');
 let Order = require('./models/Order');
+let Product = require('./models/Product');
 let app = express();
 let ejsLayouts = require("express-ejs-layouts");
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(ejsLayouts);
+app.set('layout', 'layout'); 
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
@@ -100,6 +102,51 @@ const productList = [
   }
 ];
 
+const ADMIN_EMAIL = 'admin@example.com';
+const ADMIN_PASSWORD = 'admin123';
+
+const isAdmin = (req, res, next) => {
+  if (req.session.userEmail === ADMIN_EMAIL) {
+    return next();
+  }
+  res.status(403).send('Access denied');
+};
+
+app.get('/admin/products', isAdmin, async (req, res) => {
+    const products = await Product.find();
+    //console.log(products)
+    res.render('admin/products', { products });
+});
+
+app.post('/admin/products', isAdmin, async (req, res) => {
+  const { title, price, description, image } = req.body;
+  await Product.create({ title, price, description, image });
+  res.redirect('/admin/products');
+});
+
+app.get('/admin/products/:id/edit', isAdmin, async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  res.render('admin/edit-product', { product });
+});
+
+app.post('/admin/products/:id', isAdmin, async (req, res) => {
+  const { title, price, description, image } = req.body;
+  await Product.findByIdAndUpdate(req.params.id, { title, price, description, image });
+  res.redirect('/admin/products');
+});
+
+app.post('/admin/products/:id/delete', isAdmin, async (req, res) => {
+  await Product.findByIdAndDelete(req.params.id);
+  res.redirect('/admin/products');
+});
+
+app.get('/admin/orders', isAdmin, async (req, res) => {
+    const orders = await Order.find().sort({ createdAt: -1 });
+    res.render('admin/orders', { orders });
+});
+
+
+
 
 app.get("/contact-us", (req, res) => {
   res.render("contact-us");
@@ -131,6 +178,13 @@ app.get('/login', (req, res) => {
 
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
+
+    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+        req.session.userEmail = email;
+        req.session.isAdmin = true;
+        return res.redirect('/admin/products');
+    }
+
     const user = await User.findOne({ email });
     if (user && await bcrypt.compare(password, user.password)) {
         req.session.userEmail = user.email;

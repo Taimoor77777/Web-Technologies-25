@@ -1,0 +1,208 @@
+<style>
+.edit-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 80px 30px;
+    background-color: white;
+    min-height: 70vh;
+}
+
+.edit-container h2 {
+    font-family: "Bembo", Georgia, serif;
+    font-size: 24px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 60px;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.edit-form input,
+.edit-form textarea {
+    padding: 15px;
+    border: 1px solid #ddd;
+    background-color: white;
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.edit-form input:focus,
+.edit-form textarea:focus {
+    outline: none;
+    border-color: black;
+}
+
+.edit-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.update-btn {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex: 1;
+}
+
+.update-btn:hover {
+    background-color: #333;
+}
+
+.cancel-btn {
+    background-color: transparent;
+    color: black;
+    border: 1px solid #ddd;
+    padding: 15px 30px;
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    flex: 1;
+    text-align: center;
+    display: inline-block;
+}
+
+.cancel-btn:hover {
+    background-color: #f5f5f5;
+    border-color: black;
+}
+
+.image-preview {
+    width: 100%;
+    max-width: 200px;
+    height: 150px;
+    object-fit: cover;
+    margin-top: 10px;
+    border: 1px solid #eee;
+}
+
+.no-image {
+    width: 100%;
+    max-width: 200px;
+    height: 150px;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+    border: 1px solid #eee;
+}
+
+@media (max-width: 768px) {
+    .edit-container {
+        padding: 60px 20px;
+        max-width: 100%;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+</style>
+
+<div class="edit-container">
+    <h2>Edit Product</h2>
+    
+    <form action="/admin/products/<%= product._id %>" method="POST" class="edit-form">
+        <div class="form-group">
+            <label for="title">Product Title</label>
+            <input type="text" id="title" name="title" value="<%= product.title %>" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="price">Price (Rs.)</label>
+            <input type="number" id="price" name="price" value="<%= product.price %>" min="0" step="0.01" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description"><%= product.description || '' %></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="image">Image URL</label>
+            <input type="url" id="image" name="image" value="<%= product.image || '' %>">
+            <% if (product.image) { %>
+                <img src="<%= product.image %>" alt="<%= product.title %>" class="image-preview">
+            <% } else { %>
+                <div class="no-image">No Image</div>
+            <% } %>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="update-btn">Update Product</button>
+            <a href="/admin/products" class="cancel-btn">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const imageInput = document.getElementById('image');
+    const imagePreview = document.querySelector('.image-preview');
+    const noImage = document.querySelector('.no-image');
+    
+    imageInput.addEventListener('input', function() {
+        if (this.value) {
+            if (imagePreview) {
+                imagePreview.src = this.value;
+            } else if (noImage) {
+                noImage.outerHTML = `<img src="${this.value}" alt="Preview" class="image-preview">`;
+            }
+        }
+    });
+    
+    // Form validation
+    const form = document.querySelector('.edit-form');
+    const priceInput = document.getElementById('price');
+    
+    form.addEventListener('submit', function(e) {
+        if (priceInput.value <= 0) {
+            alert('Price must be greater than 0');
+            e.preventDefault();
+        }
+    });
+});
+</script>
