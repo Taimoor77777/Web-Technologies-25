@@ -6,6 +6,7 @@ let bcrypt = require('bcryptjs');
 let User = require('./models/User');
 let Order = require('./models/Order');
 let Product = require('./models/Product');
+let Vehicle = require('./models/Vehicle');
 let app = express();
 let ejsLayouts = require("express-ejs-layouts");
 
@@ -13,6 +14,20 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(ejsLayouts);
 app.set('layout', 'layout'); 
+let multer = require('multer');
+let path = require('path');
+
+let storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/uploads'); // store in public/uploads
+    },
+    filename: function (req, file, cb) {
+        const uniqueName = Date.now() + path.extname(file.originalname);
+        cb(null, uniqueName);
+    }
+});
+let upload = multer({ storage });
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
@@ -64,6 +79,7 @@ app.use((req, res, next) => {
   res.locals.isAdmin = req.session.userEmail === ADMIN_EMAIL;
   next();
 });
+
 
 const productList = [
    {
@@ -151,6 +167,44 @@ app.get('/admin/orders', isAdmin, async (req, res) => {
     res.render('admin/orders', { orders });
 });
 
+app.get('/vehicles', async (req, res) => {
+    const vehicles = await Vehicle.find();
+    res.render('vehicles', { vehicles });
+});
+
+app.get('/admin/vehicles', isAdmin, async (req, res) => {
+    const vehicles = await Vehicle.find();
+    res.render('admin/vehicles', { vehicles });
+});
+
+app.get('/admin/vehicles/new', isAdmin, (req, res) => {
+    res.render('admin/vehicle-form', { vehicle: {}, editing: false });
+});
+
+app.post('/admin/vehicles', isAdmin, upload.single('image'), async (req, res) => {
+    const { name, brand, price, type } = req.body;
+    const image = req.file ? req.file.filename : '';
+    await Vehicle.create({ name, brand, price, type, image });
+    res.redirect('/admin/vehicles');
+});
+
+app.get('/admin/vehicles/:id/edit', isAdmin, async (req, res) => {
+    const vehicle = await Vehicle.findById(req.params.id);
+    res.render('admin/vehicle-form', { vehicle, editing: true });
+});
+
+app.post('/admin/vehicles/:id', isAdmin, upload.single('image'), async (req, res) => {
+    const { name, brand, price, type } = req.body;
+    const update = { name, brand, price, type };
+    if (req.file) update.image = req.file.filename;
+    await Vehicle.findByIdAndUpdate(req.params.id, update);
+    res.redirect('/admin/vehicles');
+});
+
+app.post('/admin/vehicles/:id/delete', isAdmin, async (req, res) => {
+    await Vehicle.findByIdAndDelete(req.params.id);
+    res.redirect('/admin/vehicles');
+});
 
 
 
@@ -169,7 +223,7 @@ app.get('/services', (req, res) => {
 app.get('/', isAuthenticated, (req, res) => {
     //res.render('LandingPage', { title: 'Home', userEmail: req.session.userEmail, products: productList });
     const message = req.session.successMessage;
-    req.session.successMessage = null; // clear after reading
+    req.session.successMessage = null; 
     res.render('LandingPage', {
         title: 'Home',
         userEmail: req.session.userEmail,
@@ -230,7 +284,7 @@ app.get('/my-orders', isAuthenticated, async (req, res) => {
 app.post('/add-to-cart', (req, res) => {
     const { name, price } = req.body;
 
-    // Check if already in cart
+    
     const existing = req.session.cart.find(item => item.name === name);
     if (existing) {
         existing.quantity += 1;
@@ -247,7 +301,7 @@ app.get('/cart', (req, res) => {
     res.render('cart', { cart, total });
 });
 
-// Update cart quantity
+
 app.post('/update-cart', (req, res) => {
     const { index, action, quantity } = req.body;
     const cart = req.session.cart || [];
@@ -266,7 +320,7 @@ app.post('/update-cart', (req, res) => {
     res.redirect('/cart');
 });
 
-// Remove item from cart
+
 app.post('/remove-from-cart', (req, res) => {
     const { index } = req.body;
     const cart = req.session.cart || [];
@@ -301,7 +355,7 @@ app.post('/place-order', async (req, res) => {
         userEmail: req.session.userEmail || null
     });
 
-    req.session.cart = []; // Clear cart after placing order
+    req.session.cart = []; 
 
     req.session.successMessage = '✅ Order placed successfully. Thank you!';
     res.redirect('/');
@@ -322,15 +376,3 @@ app.listen(4000, () => {
   console.log("server started at localhost:4000");
 });
 console.log('Mongoose version:', mongoose.version);
-// let express = require("express");
-// const port = 4000;
-// const app = express();
-
-// app.get('/', (req,res) => {
-//     res.send("hello3")
-
-// });
-
-// app.listen(port, () =>{
-//     console.log("server running");
-// });

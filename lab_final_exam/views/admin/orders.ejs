@@ -1,0 +1,290 @@
+<style>
+.orders-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 30px;
+    background-color: white;
+}
+
+.orders-container h2 {
+    font-family: "Bembo", Georgia, serif;
+    font-size: 24px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 60px;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.order-card {
+    border: 1px solid #eee;
+    padding: 30px;
+    background-color: white;
+    transition: box-shadow 0.3s ease;
+}
+
+.order-card:hover {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.order-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.order-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.order-label {
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.order-value {
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 14px;
+    color: #333;
+}
+
+.order-total {
+    font-family: "Bembo", Georgia, serif;
+    font-size: 18px;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.order-status {
+    padding: 8px 15px;
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 0;
+    text-align: center;
+    min-width: 100px;
+}
+
+.status-pending {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.status-processing {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+.status-shipped {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status-delivered {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+.order-items-title {
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.order-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 14px;
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.item-details {
+    flex: 1;
+}
+
+.item-name {
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.item-quantity {
+    color: #666;
+    font-size: 12px;
+}
+
+.item-price {
+    color: #333;
+    font-weight: normal;
+}
+
+.order-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.action-btn {
+    background-color: transparent;
+    color: black;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    background-color: black;
+    color: white;
+    border-color: black;
+}
+
+.no-orders {
+    text-align: center;
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 14px;
+    color: #666;
+    padding: 60px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+    .orders-container {
+        padding: 60px 20px;
+    }
+    
+    .order-card {
+        padding: 20px;
+    }
+    
+    .order-header {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        text-align: left;
+    }
+    
+    .order-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .order-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+</style>
+
+<div class="orders-container">
+    <h2>All Orders</h2>
+    
+    <% if (!orders || orders.length === 0) { %>
+        <div class="no-orders">
+            <p>No orders found</p>
+        </div>
+    <% } else { %>
+        <div class="orders-list">
+            <% orders.forEach(order => { %>
+                <div class="order-card">
+                    <div class="order-header">
+                        <div class="order-info">
+                            <div class="order-label">Customer Name</div>
+                            <div class="order-value"><%= order.name %></div>
+                        </div>
+                        
+                        <div class="order-info">
+                            <div class="order-label">Email</div>
+                            <div class="order-value"><%= order.userEmail || 'Guest' %></div>
+                        </div>
+                        
+                        <div class="order-info">
+                            <div class="order-label">Total Amount</div>
+                            <div class="order-value order-total">£ <%= order.total %></div>
+                        </div>
+                        
+                        <div class="order-status status-<%= (order.status || 'pending').toLowerCase() %>">
+                            <%= order.status || 'Pending' %>
+                        </div>
+                    </div>
+                    
+                    <div class="order-items-section">
+                        <div class="order-items-title">Order Items</div>
+                        <ul class="order-items">
+                            <% order.items.forEach(item => { %>
+                                <li class="order-item">
+                                    <div class="item-details">
+                                        <div class="item-name"><%= item.name %></div>
+                                        <div class="item-quantity">Quantity: <%= item.quantity %></div>
+                                    </div>
+                                    <div class="item-price">£ <%= item.price %></div>
+                                </li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                    
+                    <div class="order-actions">
+                        <form action="/admin/orders/<%= order._id %>/status" method="POST" style="display: inline;">
+                            <input type="hidden" name="status" value="processing">
+                            <button type="submit" class="action-btn">Mark Processing</button>
+                        </form>
+                        
+                        <form action="/admin/orders/<%= order._id %>/status" method="POST" style="display: inline;">
+                            <input type="hidden" name="status" value="shipped">
+                            <button type="submit" class="action-btn">Mark Shipped</button>
+                        </form>
+                        
+                        <form action="/admin/orders/<%= order._id %>/status" method="POST" style="display: inline;">
+                            <input type="hidden" name="status" value="delivered">
+                            <button type="submit" class="action-btn">Mark Delivered</button>
+                        </form>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } %>
+</div>
