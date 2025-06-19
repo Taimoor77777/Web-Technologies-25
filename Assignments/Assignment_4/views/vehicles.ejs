@@ -1,0 +1,279 @@
+<style>
+.vehicles-showcase {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 30px;
+    background-color: white;
+}
+
+.vehicles-showcase h2 {
+    font-family: "Bembo", Georgia, serif;
+    font-size: 24px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 60px;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+.vehicles-collection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+}
+
+.vehicle-showcase-card {
+    background-color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.vehicle-showcase-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.vehicle-showcase-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 25px;
+    transition: opacity 0.3s ease;
+}
+
+.vehicle-showcase-card:hover .vehicle-showcase-image {
+    opacity: 0.95;
+}
+
+.no-image-placeholder {
+    width: 100%;
+    height: 300px;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 25px;
+}
+
+.vehicle-showcase-info {
+    padding: 0 5px;
+}
+
+.vehicle-showcase-title {
+    font-family: "Bembo", Georgia, serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #333;
+    line-height: 1.3;
+}
+
+.vehicle-showcase-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.vehicle-showcase-type {
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.vehicle-showcase-price {
+    font-family: "Bembo", Georgia, serif;
+    font-size: 18px;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: normal;
+}
+
+.vehicle-showcase-divider {
+    width: 30px;
+    height: 1px;
+    background-color: #ddd;
+    margin: 20px 0;
+}
+
+.no-vehicles-message {
+    text-align: center;
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 14px;
+    color: #666;
+    padding: 80px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.vehicles-intro {
+    text-align: center;
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 60px;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Luxury hover effect for the entire card */
+.vehicle-showcase-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 49%, rgba(0,0,0,0.02) 50%, transparent 51%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.vehicle-showcase-card:hover::before {
+    opacity: 1;
+}
+
+.vehicle-showcase-card {
+    position: relative;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .vehicles-showcase {
+        padding: 60px 20px;
+    }
+    
+    .vehicles-collection {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .vehicle-showcase-image,
+    .no-image-placeholder {
+        height: 250px;
+    }
+    
+    .vehicle-showcase-title {
+        font-size: 18px;
+    }
+    
+    .vehicle-showcase-details {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .vehicles-intro {
+        margin-bottom: 40px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .vehicles-showcase h2 {
+        font-size: 20px;
+        margin-bottom: 40px;
+    }
+    
+    .vehicle-showcase-image,
+    .no-image-placeholder {
+        height: 200px;
+    }
+    
+    .vehicle-showcase-title {
+        font-size: 16px;
+    }
+    
+    .vehicle-showcase-price {
+        font-size: 16px;
+    }
+}
+</style>
+
+<div class="vehicles-showcase">
+    <h2>Available Vehicles</h2>
+    
+    <div class="vehicles-intro">
+        Discover our curated collection of premium vehicles, each selected for their exceptional quality and performance.
+    </div>
+    
+    <% if (!vehicles || vehicles.length === 0) { %>
+        <div class="no-vehicles-message">
+            <p>No vehicles currently available</p>
+        </div>
+    <% } else { %>
+        <div class="vehicles-collection">
+            <% vehicles.forEach(v => { %>
+                <div class="vehicle-showcase-card">
+                    <% if (v.image) { %>
+                        <img src="/uploads/<%= v.image %>" alt="<%= v.name %> - <%= v.brand %>" class="vehicle-showcase-image">
+                    <% } else { %>
+                        <div class="no-image-placeholder">Image Coming Soon</div>
+                    <% } %>
+                    
+                    <div class="vehicle-showcase-info">
+                        <h4 class="vehicle-showcase-title"><%= v.name %> - <%= v.brand %></h4>
+                        
+                        <div class="vehicle-showcase-divider"></div>
+                        
+                        <div class="vehicle-showcase-details">
+                            <span class="vehicle-showcase-type"><%= v.type %></span>
+                            <span class="vehicle-showcase-price">£<%= v.price %></span>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } %>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add smooth scroll behavior for any internal links
+    const vehicleCards = document.querySelectorAll('.vehicle-showcase-card');
+    
+    vehicleCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            // Optional: Add any additional hover effects here
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            // Optional: Add any additional hover exit effects here
+        });
+    });
+    
+    // Lazy loading for images (optional enhancement)
+    const images = document.querySelectorAll('.vehicle-showcase-image');
+    
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.style.opacity = '1';
+                    observer.unobserve(img);
+                }
+            });
+        });
+        
+        images.forEach(img => {
+            img.style.opacity = '0';
+            img.style.transition = 'opacity 0.5s ease';
+            imageObserver.observe(img);
+        });
+    }
+});
+</script>

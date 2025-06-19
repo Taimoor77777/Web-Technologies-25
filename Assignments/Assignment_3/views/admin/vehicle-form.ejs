@@ -1,0 +1,255 @@
+<style>
+.vehicle-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 80px 30px;
+    background-color: white;
+    min-height: 70vh;
+}
+
+.vehicle-form-container h2 {
+    font-family: "Bembo", Georgia, serif;
+    font-size: 24px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 60px;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+.vehicle-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.vehicle-form input[type="text"],
+.vehicle-form input[type="number"] {
+    padding: 15px;
+    border: 1px solid #ddd;
+    background-color: white;
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.vehicle-form input:focus {
+    outline: none;
+    border-color: black;
+}
+
+.vehicle-form input::placeholder {
+    color: #999;
+    font-size: 14px;
+}
+
+.file-input-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.file-input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.file-input-label {
+    display: block;
+    padding: 15px;
+    border: 2px dashed #ddd;
+    background-color: #f9f9f9;
+    text-align: center;
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-input-label:hover {
+    border-color: black;
+    background-color: #f5f5f5;
+}
+
+.file-input-label.has-file {
+    border-color: black;
+    background-color: #f0f0f0;
+    color: black;
+}
+
+.current-image {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.current-image img {
+    max-width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border: 1px solid #eee;
+}
+
+.current-image-label {
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #666;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.submit-btn {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 18px 30px;
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex: 1;
+}
+
+.submit-btn:hover {
+    background-color: #333;
+}
+
+.cancel-btn {
+    background-color: transparent;
+    color: black;
+    border: 1px solid #ddd;
+    padding: 18px 30px;
+    font-family: "Helvetica", Georgia, serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    flex: 1;
+    text-align: center;
+    display: inline-block;
+}
+
+.cancel-btn:hover {
+    background-color: #f5f5f5;
+    border-color: black;
+}
+
+@media (max-width: 768px) {
+    .vehicle-form-container {
+        padding: 60px 20px;
+        max-width: 100%;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+</style>
+
+<div class="vehicle-form-container">
+    <h2><%= editing ? "Edit Vehicle" : "Add Vehicle" %></h2>
+    
+    <form method="POST" enctype="multipart/form-data" action="<%= editing ? '/admin/vehicles/' + vehicle._id : '/admin/vehicles' %>" class="vehicle-form">
+        <div class="form-group">
+            <label for="name">Vehicle Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter vehicle name" value="<%= vehicle.name || '' %>" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="brand">Brand</label>
+            <input type="text" id="brand" name="brand" placeholder="Enter brand name" value="<%= vehicle.brand || '' %>" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="price">Price (£)</label>
+            <input type="number" id="price" name="price" placeholder="Enter price" value="<%= vehicle.price || '' %>" min="0" step="0.01" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="type">Vehicle Type</label>
+            <input type="text" id="type" name="type" placeholder="Enter vehicle type" value="<%= vehicle.type || '' %>" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="image">Vehicle Image</label>
+            <div class="file-input-wrapper">
+                <input type="file" id="image" name="image" class="file-input" accept="image/*">
+                <label for="image" class="file-input-label">
+                    <span class="file-text">Choose Image File</span>
+                </label>
+            </div>
+            
+            <% if (editing && vehicle.image) { %>
+                <div class="current-image">
+                    <span class="current-image-label">Current Image</span>
+                    <img src="/uploads/<%= vehicle.image %>" alt="<%= vehicle.name %>">
+                </div>
+            <% } %>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="submit-btn"><%= editing ? "Update" : "Add" %> Vehicle</button>
+            <a href="/admin/vehicles" class="cancel-btn">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('image');
+    const fileLabel = document.querySelector('.file-input-label');
+    const fileText = document.querySelector('.file-text');
+    
+    fileInput.addEventListener('change', function() {
+        if (this.files && this.files.length > 0) {
+            fileText.textContent = this.files[0].name;
+            fileLabel.classList.add('has-file');
+        } else {
+            fileText.textContent = 'Choose Image File';
+            fileLabel.classList.remove('has-file');
+        }
+    });
+    
+    // Form validation
+    const form = document.querySelector('.vehicle-form');
+    const priceInput = document.getElementById('price');
+    
+    form.addEventListener('submit', function(e) {
+        if (priceInput.value <= 0) {
+            alert('Price must be greater than 0');
+            e.preventDefault();
+        }
+    });
+});
+</script>

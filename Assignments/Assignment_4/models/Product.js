@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 
 // Define the schema
 const productSchema = new mongoose.Schema({
-  name: String,
+  title: String,
   price: Number,
-  inStock: Boolean,
+  description: String,
+  image: String
 });
 
 // Export the model

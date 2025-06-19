@@ -1,3 +1,8 @@
+<% if (successMessage) { %>
+    <div class="alert alert-success">
+        <%= successMessage %>
+    </div>
+<% } %>
 <div class="bg-img2">
 
         <div class="line">
@@ -79,10 +84,15 @@
                 <img src="<%= product.image %>" alt="<%= product.name %>" class="product-image">
                 <h3 class="product-name"><%= product.name %></h3>
                 <p class="product-price">Price: $<%= product.price %></p>
-                <div class="btn-container">
+                <form action="/add-to-cart" method="POST">
+                    <input type="hidden" name="name" value="<%= product.name %>">
+                    <input type="hidden" name="price" value="<%= product.price %>">
+                    <button type="submit">Add to Cart</button>
+                </form>
+                <!-- <div class="btn-container">
                     <div class="btnw">Shop Women</div>
                     <div class="btn">Shop Men</div>
-                </div>
+                </div> -->
             </div>
         <% }) %>
     </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV</title>
+    <title>Project</title>
     <link rel="stylesheet" href="/LpStyle.css">
 </head>
 <body>
@@ -30,6 +30,8 @@
                     <% if (userEmail) { %>
                         <a href="<%= isAdmin ? '/admin/orders' : '/my-orders' %>">My Orders</a>
                         <a href="/logout">Logout</a>
+                        <a href="<%= isAdmin ? '/admin/vehicles' : '/vehicles' %>">Vehicles</a>
+
                     <% } else { %>
                         <a href="/login">Login</a>
                         <a href="/register">Register</a>
